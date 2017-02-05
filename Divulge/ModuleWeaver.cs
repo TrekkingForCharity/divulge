@@ -10,7 +10,7 @@ public class ModuleWeaver
         var types = ModuleDefinition.GetTypes().Where(x => x.HasProperties);
         foreach (var typeDefinition in types)
         {
-            var properties = typeDefinition.Properties.Where(x => x.SetMethod.IsPrivate);
+            var properties = typeDefinition.Properties.Where(x => x.SetMethod != null && x.SetMethod.IsPrivate);
 
             foreach (var propertyDefinition in properties)
                 propertyDefinition.SetMethod.IsPublic = true;
